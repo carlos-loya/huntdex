@@ -1,0 +1,7 @@
+name = "huntdex"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "./dist"
+
+[vars]
+BLIZZARD_CLIENT_ID = ""
+# BLIZZARD_CLIENT_SECRET should be set via `wrangler secret put` or Cloudflare dashboard
