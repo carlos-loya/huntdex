@@ -1,18 +1,40 @@
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+# Dependencies
+node_modules/
 
-# Test binary, build with `go test -c`
-*.test
+# Build output
+dist/
+dist-ssr/
 
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.local
+.dev.vars
 
-# Ignore vender source from being checked in
-vendor/*/
+# Logs
+logs
+*.log
+npm-debug.log*
 
-# Binaries
-bin/*
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.swp
+*.swo
+*.sw?
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cloudflare
+.wrangler/
+
+# TypeScript
+*.tsbuildinfo
