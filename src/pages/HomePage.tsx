@@ -1,13 +1,25 @@
-import { Crosshair, ChevronRight } from "lucide-react";
+import { Crosshair } from "lucide-react";
+import { Navigate } from "react-router";
+import { cn } from "@/lib/utils";
+import { LoginButton } from "@/components/auth/LoginButton";
+import { useAuthStore, type Region } from "@/stores/auth-store";
 
-const REGIONS = [
+const REGIONS: { value: Region; label: string }[] = [
   { value: "us", label: "Americas" },
   { value: "eu", label: "Europe" },
   { value: "kr", label: "Korea" },
   { value: "tw", label: "Taiwan" },
-] as const;
+];
 
 export function HomePage() {
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const region = useAuthStore((s) => s.region);
+  const setRegion = useAuthStore((s) => s.setRegion);
+
+  if (isAuthenticated()) {
+    return <Navigate to="/characters" replace />;
+  }
+
   return (
     <div className="flex flex-col items-center justify-center px-4 py-24">
       {/* Hero */}
@@ -28,22 +40,25 @@ export function HomePage() {
       <div className="mb-8 flex flex-col items-center gap-4">
         <p className="text-sm font-medium text-muted-foreground">Select your region</p>
         <div className="flex gap-2">
-          {REGIONS.map((region) => (
+          {REGIONS.map((r) => (
             <button
-              key={region.value}
-              className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-ring"
+              key={r.value}
+              onClick={() => setRegion(r.value)}
+              className={cn(
+                "rounded-lg border px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring",
+                region === r.value
+                  ? "border-primary bg-primary/10 text-primary"
+                  : "border-border bg-card text-foreground hover:border-primary hover:text-primary",
+              )}
             >
-              {region.label}
+              {r.label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Login Button Placeholder */}
-      <button className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-colors hover:bg-primary/90">
-        Login with Battle.net
-        <ChevronRight className="h-4 w-4" />
-      </button>
+      {/* Login */}
+      <LoginButton />
 
       {/* Features */}
       <div className="mt-20 grid max-w-3xl gap-8 sm:grid-cols-3">
