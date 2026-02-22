@@ -13,13 +13,13 @@ export function Header() {
   }
 
   return (
-    <header className="border-b border-border bg-card/80 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-sm">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-2 text-primary hover:opacity-80">
-          <Crosshair className="h-6 w-6" />
-          <span className="text-lg font-bold tracking-wide">HUNTDEX</span>
+          <Crosshair className="h-5 w-5 sm:h-6 sm:w-6" />
+          <span className="text-base font-bold tracking-wide sm:text-lg">HUNTDEX</span>
         </Link>
-        <nav className="flex items-center gap-4">
+        <nav className="flex items-center gap-2 sm:gap-4">
           {isAuthenticated() && (
             <>
               <Link
@@ -30,10 +30,10 @@ export function Header() {
               </Link>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:px-3"
               >
                 <LogOut className="h-3.5 w-3.5" />
-                Logout
+                <span className="hidden sm:inline">Logout</span>
               </button>
             </>
           )}

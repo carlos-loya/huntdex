@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { useHunterPets } from "@/hooks/useHunterPets";
 import { usePetDex } from "@/hooks/usePetDex";
+import { ErrorBanner } from "@/components/ui/ErrorBanner";
 import { DexFamilyCard } from "@/components/pets/DexFamilyCard";
 import { DexFilters, type CollectedFilter, type SpecFilter } from "@/components/pets/DexFilters";
 import { ProgressBar } from "@/components/pets/ProgressBar";
@@ -67,11 +68,13 @@ export function DexPage() {
 
       {/* Error */}
       {error && (
-        <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-destructive">
-          {error.message.includes("404")
-            ? "No hunter pet data found. This character may not be a Hunter, or may need to log out after the weekly reset."
-            : `Failed to load pets: ${error.message}`}
-        </div>
+        <ErrorBanner
+          message={
+            error.message.includes("404")
+              ? "No hunter pet data found. This character may not be a Hunter, or may need to log out after the weekly reset."
+              : `Failed to load pets: ${error.message}`
+          }
+        />
       )}
 
       {/* Dex Content */}

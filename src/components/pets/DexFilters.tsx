@@ -39,9 +39,9 @@ export function DexFilters({
   onExoticOnlyChange,
 }: DexFiltersProps) {
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+    <div className="space-y-3">
       {/* Search */}
-      <div className="relative flex-1">
+      <div className="relative">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <input
           type="text"
@@ -52,54 +52,57 @@ export function DexFilters({
         />
       </div>
 
-      {/* Collected filter */}
-      <div className="flex gap-1">
-        {COLLECTED_OPTIONS.map((opt) => (
-          <button
-            key={opt.value}
-            onClick={() => onCollectedFilterChange(opt.value)}
-            className={cn(
-              "rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
-              collectedFilter === opt.value
-                ? "bg-primary text-primary-foreground"
-                : "bg-card text-muted-foreground hover:text-foreground",
-            )}
-          >
-            {opt.label}
-          </button>
-        ))}
-      </div>
+      {/* Filter pills */}
+      <div className="flex flex-wrap items-center gap-2">
+        {/* Collected filter */}
+        <div className="flex gap-1 rounded-lg bg-muted p-0.5">
+          {COLLECTED_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              onClick={() => onCollectedFilterChange(opt.value)}
+              className={cn(
+                "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
+                collectedFilter === opt.value
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
 
-      {/* Spec filter */}
-      <div className="flex gap-1">
-        {SPEC_OPTIONS.map((opt) => (
-          <button
-            key={opt.value}
-            onClick={() => onSpecFilterChange(opt.value)}
-            className={cn(
-              "rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
-              specFilter === opt.value
-                ? "bg-primary text-primary-foreground"
-                : "bg-card text-muted-foreground hover:text-foreground",
-            )}
-          >
-            {opt.label}
-          </button>
-        ))}
-      </div>
+        {/* Spec filter */}
+        <div className="flex gap-1 rounded-lg bg-muted p-0.5">
+          {SPEC_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              onClick={() => onSpecFilterChange(opt.value)}
+              className={cn(
+                "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
+                specFilter === opt.value
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
 
-      {/* Exotic toggle */}
-      <button
-        onClick={() => onExoticOnlyChange(!exoticOnly)}
-        className={cn(
-          "rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
-          exoticOnly
-            ? "bg-primary text-primary-foreground"
-            : "bg-card text-muted-foreground hover:text-foreground",
-        )}
-      >
-        Exotic Only
-      </button>
+        {/* Exotic toggle */}
+        <button
+          onClick={() => onExoticOnlyChange(!exoticOnly)}
+          className={cn(
+            "rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
+            exoticOnly
+              ? "bg-primary text-primary-foreground shadow-sm"
+              : "bg-muted text-muted-foreground hover:text-foreground",
+          )}
+        >
+          Exotic Only
+        </button>
+      </div>
     </div>
   );
 }
